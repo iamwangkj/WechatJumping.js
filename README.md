@@ -5,7 +5,7 @@ JavaScript版本微信跳一跳"AI"脚本 可以在安卓设备上运行。
 
 ## 使用方法
 1. 下载并按照[Auto.js](https://github.com/hyb1996/Auto.js/releases)最新内测版
-2. 使用Auto.js导入或编辑该脚本[WechatJumping.js]()。
+2. 使用Auto.js导入或编辑该脚本[WechatJumpingAI.js](https://github.com/hyb1996/WechatJumping.js/blob/master/WechatJumpingAI.js)。
 3. 打开微信跳一跳，切回Auto.js界面，运行脚本，返回微信跳一跳，开始游戏
 
 如果因计算错误而失败，脚本会自动重新开始游戏。
