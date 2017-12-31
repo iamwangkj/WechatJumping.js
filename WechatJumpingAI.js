@@ -128,7 +128,7 @@ function get_scan_start_y(im){
 function find_piece(im){
     //使用内置找色函数找出棋子最顶部的位置
     var piece_top = findColor(im, piece_color, {
-        threshold: 4
+        threshold: 2
     });
 
     var piece_start_x = -1;
