@@ -135,7 +135,7 @@ function find_piece(im){
     var piece_end_x = -1;
     //遍历该行找出棋子顶部中点位置
     for(var x = 0; x < w; x++){
-        var is_piece = images.detectsColor(im, piece_color, x, piece_top.y);
+        var is_piece = images.detectsColor(im, piece_color, x, piece_top.y, 2);
         if(is_piece && piece_start_x < 0){
             piece_start_x = x;
         }
