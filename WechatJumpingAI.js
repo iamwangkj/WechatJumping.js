@@ -169,7 +169,7 @@ function main(){
             save_result(im, result);
         }
         jump(Math.sqrt(Math.pow(board.x - piece.x, 2) + Math.pow(board.y - piece.y, 2)));
-        sleep(1000);
+        sleep(2000);
     }
 }
 
