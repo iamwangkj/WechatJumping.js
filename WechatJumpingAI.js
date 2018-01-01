@@ -43,7 +43,7 @@ function press_compat(x, y, duration){
     if(device.sdkInt >= 24){
         press(x, y, duration);
     }else{
-        root_automator.press(x, y, duration);
+        shell(util.format("input swipe %d %d %d %d %d", x, y, x, y, duration), true);
     }
 }
 
@@ -160,7 +160,6 @@ function main(){
 }
 
 
-var root_automator = null;
 
 function prepare(){
     //确保无障碍服务开启
@@ -168,14 +167,8 @@ function prepare(){
     //请求截图权限
     requestScreenCapture();
     device.keepScreenOn(1000 * 3600);
-    if(device.sdkInt < 24){
-        root_automator = new RootAutomator();
-    }
     events.on("exit", function(){
         device.cancelKeepingAwake();
-        if(root_automator){
-            root_automator.exit();
-        }
     });
     if(debug){
         files.ensureDir(debug_images_dir);
