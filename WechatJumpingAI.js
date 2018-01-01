@@ -55,6 +55,9 @@ function jump(distance){
 
 function find_piece_and_board(im){
     var piece = find_piece(im);
+    if(!piece){
+        return null;
+    }
     var board = find_board(im, piece);
     return {
         piece: piece,
@@ -65,7 +68,6 @@ function find_piece_and_board(im){
 function find_board(im, piece){
     var board_x = 0;
     var board_y = 0;
-    var scan_start_y = get_scan_start_y(im);
     for(var i = parseInt(h / 3); i < parseInt(h * 2 / 3); i++){
         last_pixel = im.pixel(0, i);
         if(board_x || board_y){
@@ -102,40 +104,20 @@ function find_board(im, piece){
     }
 }
 
-
-
-function get_scan_start_y(im){
-    var scan_x_border = parseInt(w / 8)  // 扫描棋子时的左右边界
-    var scan_start_y = 0  // 扫描的起始y坐标
-    // 以50px步长，尝试探测scan_start_y
-    for(var i = under_game_score_y; i < h; i += 50){
-        var last_pixel = im.pixel(0, i);
-        for(var j = 1; j < w; j++){
-            var pixel = im.pixel(j,i);
-            // 不是纯色的线，则记录scan_start_y的值，准备跳出循环
-            if(red(pixel) != red(last_pixel) || green(pixel) != green(last_pixel) || blue(pixel) != blue(last_pixel)){
-                scan_start_y = i - 50
-                break;
-            }
-        }
-        if(scan_start_y){
-            break;
-        }
-    }
-    return scan_start_y;
-}
-
 function find_piece(im){
     //使用内置找色函数找出棋子最顶部的位置
     var piece_top = findColor(im, piece_color, {
         threshold: 3
     });
+    if(!piece_top){
+        return null;
+    }
 
     var piece_start_x = -1;
     var piece_end_x = -1;
     //遍历该行找出棋子顶部中点位置
     for(var x = 0; x < w; x++){
-        if(piece_top) { var is_piece = images.detectsColor(im, piece_color, x, piece_top.y, 2); }
+        var is_piece = images.detectsColor(im, piece_color, x, piece_top.y, 2);
         if(is_piece && piece_start_x < 0){
             piece_start_x = x;
         }
@@ -162,6 +144,10 @@ function main(){
         var im = captureScreen();
         // 获取棋子和 board 的位置
         var result = find_piece_and_board(im);
+        if(!result){
+            sleep(1000);
+            continue;
+        }
         var board = result.board;
         var piece = result.piece;
         log("find result: ", result);
