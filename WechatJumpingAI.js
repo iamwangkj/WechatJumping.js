@@ -8,11 +8,11 @@
 
 var press_coefficient = device.height == 1920 ? 1.392 : 2.099;    // 长按的时间系数，请自己根据实际情况调节
 
-const under_game_score_y = 300     // 截图中刚好低于分数显示区域的 Y 坐标，300 是 1920x1080 的值，2K 屏、全面屏请根据实际情况修改
+const under_game_score_y = 300;     // 截图中刚好低于分数显示区域的 Y 坐标，300 是 1920x1080 的值，2K 屏、全面屏请根据实际情况修改
 //按压位置为再来一局的位置
 const press_x = device.width / 2;
 const press_y = 1584 * (device.height / 1920.0);
-const piece_body_width = 80       // 棋子的宽度，比截图中量到的稍微大一点比较安全，可能要调节
+const piece_body_width = 80;       // 棋子的宽度，比截图中量到的稍微大一点比较安全，可能要调节
 const piece_dist_from_top_to_base = 188;  //棋子最顶部到棋子底部中点的距离
 // 下面的 (353, 859) 和 (772, 1100) 是游戏截图里的两个台子的中点坐标，主要用来算角度，可能要调节
 const sample_board_x1 = 353;
@@ -73,8 +73,8 @@ function find_board(im, piece){
         if(board_x || board_y){
             break;
         }
-        var board_x_sum = 0
-        var board_x_c = 0
+        var board_x_sum = 0;
+        var board_x_c = 0;
 
         for(var j = 0; j < w; j++){
             var pixel = im.pixel(j, i);
@@ -90,7 +90,7 @@ function find_board(im, piece){
             }
         }
         if(board_x_sum){
-            board_x = board_x_sum / board_x_c
+            board_x = board_x_sum / board_x_c;
         }
     }
     // 按实际的角度来算，找到接近下一个 board 中心的坐标
