@@ -4,7 +4,8 @@ JavaScript版本微信跳一跳"AI"脚本 可以在安卓设备上运行。
 **注意，需要安卓7.0以上或者有root权限的设备才能运行本脚本**
 
 ## v2脚本
-感谢唐嫣(QQ:3194096648)提供的v2版本，更快更准确，同时跳过了微信的作弊检测（但没有跳过高分检测），下载：https://raw.githubusercontent.com/hyb1996/WechatJumping.js/master/WechatJumpingV2.js。
+感谢唐嫣(QQ:3194096648)提供的v2版本，更快更准确，同时跳过了微信的作弊检测（但没有跳过高分检测），下载：https://raw.githubusercontent.com/hyb1996/WechatJumping.js/master/WechatJumpingV2.js
+
 v2脚本的使用方法gif图：
 ![image](https://github.com/hyb1996/WechatJumping.js/blob/master/v2-preview.gif)
 
