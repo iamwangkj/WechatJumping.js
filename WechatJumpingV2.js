@@ -1,3 +1,4 @@
+auto();
 requestScreenCapture(); //请求截图
 
 var window = floaty.window(
