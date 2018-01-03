@@ -6,7 +6,10 @@
 
 // 在原算法基础上优化了找出棋子的算法(直接使用Auto.js内置使用opencv实现的找色函数, 比原算法快很多)，但是在手机设备上找出跳跃位置的算法的效率还是不够理想
 
-var press_coefficient = device.height == 1920 ? 1.392 : 2.099;    // 长按的时间系数，请自己根据实际情况调节
+var press_coefficient = device.height == 1920 ? "1.392,1.392" : "2.099,2.099";    // 长按的时间系数，请自己根据实际情况调节var press_coefficient_left = press_coefficient;
+var press_coefficient_left;
+var press_coefficient_right;
+
 
 const under_game_score_y = 300;     // 截图中刚好低于分数显示区域的 Y 坐标，300 是 1920x1080 的值，2K 屏、全面屏请根据实际情况修改
 //按压位置为再来一局的位置
@@ -48,8 +51,16 @@ function press_compat(x, y, duration){
 }
 
 function jump(distance){
-    var press_time = distance * press_coefficient;
+    var press_coefficient;
+    if(distance > 0){
+        press_coefficient = press_coefficient_right;
+    }else{
+        press_coefficient = press_coefficient_left;
+    }
+    var press_time = abs(distance) * press_coefficient;
     press_time = max(200, press_time);
+    var press_x = random(500, 1000);
+    var press_y = random(800, 1600);
     press_compat(press_x, press_y, parseInt(press_time));
 }
 
@@ -154,7 +165,12 @@ function main(){
         if(debug && result){
             save_result(im, result);
         }
-        jump(Math.sqrt(Math.pow(board.x - piece.x, 2) + Math.pow(board.y - piece.y, 2)));
+        var distance = Math.sqrt(Math.pow(board.x - piece.x, 2) + Math.pow(board.y - piece.y, 2));
+        if(piece.x < board.x){
+            jump(distance);
+        }else{
+            jump(-distance);
+        }
         sleep(2000);
     }
 }
@@ -176,9 +192,14 @@ function prepare(){
     //从存储中读取系数
     var storage = storages.create("org.autojs.wxjumping");
     press_coefficient = storage.get("press_coefficient", press_coefficient);
+    if(press_coefficient.indexOf(",") < 0){
+        press_coefficient = press_coefficient + "," + press_coefficient;
+    }
     //让用户输入系数
-    press_coefficient = dialogs.input("调整跳跃系数(可选)", press_coefficient);
+    press_coefficient = dialogs.rawInput("调整跳跃系数(可选)", press_coefficient);
     storage.put("press_coefficient", press_coefficient);
+    press_coefficient_left = parseFloat(press_coefficient.split(',')[0]);
+    press_coefficient_right = parseFloat(press_coefficient.split(',')[1]);
 }
 
 function save_result(im, result){
