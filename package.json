@@ -1,0 +1,15 @@
+{
+  "name": "WechatJumping.js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/iamwangkj/WechatJumping.js.git",
+  "author": "wangkj <wangkaijie5@jd.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0"
+  }
+}
